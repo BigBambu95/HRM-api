@@ -6,8 +6,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-// Routes
+// Routes import
 const vacancies = require("./routes/api/vacancies");
+const offices = require("./routes/api/offices");
 
 // Server Port
 const PORT = process.env.PORT || 8080;
@@ -28,7 +29,9 @@ mongoose
 // Middleware
 app.use(cors());
 
+// Routes
 app.use("/api/vacancies", vacancies);
+app.use("/api/offices", offices);
 
 app.get("/", (req, res) => {
   res.send("hEllo world");
