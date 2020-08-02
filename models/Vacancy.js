@@ -2,10 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const vacancySchema = new Schema({
-  profession: String,
+  profession: {
+    type: String,
+    required: true
+  },
   url: String,
-  office: String,
-  date: Date,
+  office: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    required: true
+  },
   quickly: Boolean,
   candidates: [
     { type: Schema.Types.ObjectId, ref: "Candidate" }

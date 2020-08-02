@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const bodyParser = require('body-parser');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ mongoose
 
 // Middleware
 app.use(cors());
+app.use(bodyParser.json());
 
 // Routes
 app.use("/api/vacancies", vacancies);

@@ -14,6 +14,23 @@ router.get("/", function (req, res) {
     );
 });
 
+router.post("/", function(req, res) {
+  // TODO Сделать нормальную серверную валидацию
+  if(req.body.profession.length < 3) return res.json({ message: "Поле специальность обязательно для заполнения" });
+  if(req.body.office.length < 2) return res.json({ message: "Поле офис обязательно для заполнения" });
+  if(req.body.date.length < 6) return res.json({ message: "Поле крайний срок обязательно для заполнения" });
+  
+  const vacancy = new Vacancy(req.body);
+
+  vacancy
+    .save()
+    .then((vacancy) => res.json(vacancy))
+    .catch((err) => {
+      console.error(err);
+      return res.status(503).json({ message: "Не удалось создать вакансию" })
+    })
+});
+
 router.get("/templates", function(req, res) {
   VacancyTemplate
     .find()
@@ -38,6 +55,13 @@ router.get("/:id", function(req, res) {
     .catch((err) => 
       res.status(404).json({ message: "Ошибка при получении данных вакансии" })
     )
+});
+
+router.delete("/:id", function(req, res) {
+  Vacancy
+    .findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).json({ status: true }))
+    .catch((err) => res.status(503).json({ message: "Не удалось удалить вакансию" }));
 });
 
 module.exports = router;
