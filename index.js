@@ -10,6 +10,7 @@ dotenv.config();
 // Routes import
 const vacancies = require("./routes/api/vacancies");
 const offices = require("./routes/api/offices");
+const workers = require("./routes/api/workers");
 
 // Server Port
 const PORT = process.env.PORT || 8080;
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 // Routes
 app.use("/api/vacancies", vacancies);
 app.use("/api/offices", offices);
+app.use("/api/workers", workers);
 
 app.get("/", (req, res) => {
   res.send("hEllo world");
