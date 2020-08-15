@@ -11,8 +11,13 @@ const documentSchema = new Schema({
     required: true,
     default: new Date()
   },
-  fileID: {
-    type: String,
+  file: {
+    type: { 
+      id: String,
+      name: String,
+      ext: String,
+      size: Number,
+    },
     required: true
   }
 })
