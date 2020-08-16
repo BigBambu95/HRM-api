@@ -32,7 +32,11 @@ const workerSchema = new Schema({
   },
   avatar: {
     type: String,
-    requied: false
+    required: false
+  },
+  tags: {
+    type: Array,
+    required: false
   }
 });
 

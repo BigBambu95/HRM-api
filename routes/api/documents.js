@@ -1,4 +1,5 @@
 var express = require("express");
+const path = require('path')
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 
@@ -28,7 +29,7 @@ router.post('/', (req, res) => {
 router.post('/upload', async (req, res) => {
   try {
     if(!req.files) {
-      res.json({
+      res.status(400).json({
         status: false,
         message: 'Не удалось загрузить файл'
       })
@@ -49,7 +50,7 @@ router.post('/upload', async (req, res) => {
           ext: fileExt,
           size: document.size
         }
-    });
+      });
     }
   } catch(err) {
     res.status(500).json(err)
