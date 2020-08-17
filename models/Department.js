@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const officeSchema = new Schema({
+const departmentSchema = new Schema({
   name: {
     type: String,
     required: true
   }
 })
 
-const Office = mongoose.model('Office', officeSchema);
+const Department = mongoose.model('Department', departmentSchema);
 
-module.exports = Office;
+module.exports = Department;

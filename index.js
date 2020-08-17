@@ -1,21 +1,22 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
+const express = require("express")
+const app = express()
+const mongoose = require("mongoose")
+const cors = require("cors")
+const dotenv = require("dotenv")
+const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload')
 
-dotenv.config();
+dotenv.config()
 
 // Routes import
 const vacancies = require("./routes/api/vacancies")
 const offices = require("./routes/api/offices")
 const workers = require("./routes/api/workers")
 const documents = require("./routes/api/documents")
+const departments = require("./routes/api/departments")
 
 // Server Port
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080
 
 // DB Connect
 const dbOptions = {
@@ -28,10 +29,10 @@ const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@clust
 mongoose
   .connect(dbUri, dbOptions)
   .then(() => console.log("База данных успешно подключена"))
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 
 // Middleware
-app.use(express.static('uploads'));
+app.use(express.static('uploads'))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -45,11 +46,12 @@ app.use("/api/vacancies", vacancies)
 app.use("/api/offices", offices)
 app.use("/api/workers", workers)
 app.use("/api/documents", documents)
+app.use("/api/departments", departments)
 
 app.get("/", (req, res) => {
-  res.send("hEllo world");
+  res.send("hEllo world")
 });
 
 app.listen(PORT, () => {
-  console.log(`Сервер запущен по адресу: http://localhost:${PORT}`);
+  console.log(`Сервер запущен по адресу: http://localhost:${PORT}`)
 });
