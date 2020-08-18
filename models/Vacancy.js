@@ -8,7 +8,8 @@ const vacancySchema = new Schema({
   },
   url: String,
   office: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Office",
     required: true
   },
   date: {

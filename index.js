@@ -14,6 +14,7 @@ const offices = require("./routes/api/offices")
 const workers = require("./routes/api/workers")
 const documents = require("./routes/api/documents")
 const departments = require("./routes/api/departments")
+const salaries = require("./routes/api/salaries")
 
 // Server Port
 const PORT = process.env.PORT || 8080
@@ -47,6 +48,7 @@ app.use("/api/offices", offices)
 app.use("/api/workers", workers)
 app.use("/api/documents", documents)
 app.use("/api/departments", departments)
+app.use("/api/salaries", salaries)
 
 app.get("/", (req, res) => {
   res.send("hEllo world")

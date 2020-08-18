@@ -19,7 +19,8 @@ const workerSchema = new Schema({
     required: false
   },
   office: {
-    type: String,
+    type: Schema.Types.ObjectId, 
+    ref: "Office",
     required: true
   },
   department: {
