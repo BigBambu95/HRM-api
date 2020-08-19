@@ -5,7 +5,6 @@ const Worker = require("../../models/Worker");
 const { createConditions } = require('../../helpers')
 
 router.get("/", function (req, res) {
-
   Worker
     .find(createConditions(req.query))
     .then((workers) => res.json(workers))

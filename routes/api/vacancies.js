@@ -3,10 +3,11 @@ var router = express.Router();
 
 const Vacancy = require("../../models/Vacancy");
 const Candidate = require("../../models/Candidate");
+const { createConditions } = require('../../helpers')
 
 router.get("/", function (req, res) {
   Vacancy
-    .find()
+    .find(createConditions(req.query))
     .then((vacancies) => res.json(vacancies))
     .catch((err) =>
       res.status(404).json({ message: "Ошибка при получении списка вакансий" })
