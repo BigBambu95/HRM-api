@@ -3,7 +3,6 @@ var router = express.Router();
 
 const Vacancy = require("../../models/Vacancy");
 const Candidate = require("../../models/Candidate");
-const VacancyTemplate = require("../../models/Vacancy-template");
 
 router.get("/", function (req, res) {
   Vacancy
@@ -29,15 +28,6 @@ router.post("/", function(req, res) {
       console.error(err);
       return res.status(503).json({ message: "Не удалось создать вакансию" })
     })
-});
-
-router.get("/templates", function(req, res) {
-  VacancyTemplate
-    .find()
-    .then((templates) => res.json(templates))
-    .catch((err) => 
-      res.status(404).json({ message: "Ошибка при получении шаблонов вакансий" })
-    )
 });
 
 router.get("/:id", function(req, res) {

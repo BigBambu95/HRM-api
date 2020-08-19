@@ -14,6 +14,7 @@ const offices = require("./routes/api/offices")
 const workers = require("./routes/api/workers")
 const documents = require("./routes/api/documents")
 const departments = require("./routes/api/departments")
+const professions = require("./routes/api/professions")
 const salaries = require("./routes/api/salaries")
 
 // Server Port
@@ -48,11 +49,8 @@ app.use("/api/offices", offices)
 app.use("/api/workers", workers)
 app.use("/api/documents", documents)
 app.use("/api/departments", departments)
+app.use("/api/professions", professions)
 app.use("/api/salaries", salaries)
-
-app.get("/", (req, res) => {
-  res.send("hEllo world")
-});
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен по адресу: http://localhost:${PORT}`)

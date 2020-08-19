@@ -7,7 +7,8 @@ const workerSchema = new Schema({
     required: true
   },
   profession: {
-    type: String,
+    type: Schema.Types.ObjectId, 
+    ref: "Profession",
     required: true
   },
   email: {

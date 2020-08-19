@@ -1,11 +1,13 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 const Worker = require("../../models/Worker");
+const { createConditions } = require('../../helpers')
 
 router.get("/", function (req, res) {
+
   Worker
-    .find()
+    .find(createConditions(req.query))
     .then((workers) => res.json(workers))
     .catch((err) =>
       res.status(404).json({ message: "Ошибка при получении списка сотрудников" })
