@@ -52,6 +52,11 @@ app.use("/api/departments", departments)
 app.use("/api/professions", professions)
 app.use("/api/salaries", salaries)
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер запущен по адресу: http://localhost:${PORT}`)
 });
