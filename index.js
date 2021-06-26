@@ -16,6 +16,7 @@ const documents = require("./routes/api/documents")
 const departments = require("./routes/api/departments")
 const professions = require("./routes/api/professions")
 const salaries = require("./routes/api/salaries")
+const candidates = require("./routes/api/candidates")
 
 // Server Port
 const PORT = process.env.PORT || 8080
@@ -24,6 +25,7 @@ const PORT = process.env.PORT || 8080
 const dbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false
 };
 
 const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ssc1v.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -51,6 +53,7 @@ app.use("/api/documents", documents)
 app.use("/api/departments", departments)
 app.use("/api/professions", professions)
 app.use("/api/salaries", salaries)
+app.use("/api/candidates", candidates)
 
 app.use((req, res, next) => {
   res.status(404);

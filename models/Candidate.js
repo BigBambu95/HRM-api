@@ -1,9 +1,18 @@
 const mongoose = require("mongoose");
 
 const candidateSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
-  exp: Number,
+  name: {
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number,
+    required: true
+  },
+  exp: {
+    type: Number,
+    required: true
+  },
   desiredSalary: Number,
   status: String,
   desiredProfession: String,

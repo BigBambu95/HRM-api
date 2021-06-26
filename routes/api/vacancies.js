@@ -26,7 +26,6 @@ router.post("/", function(req, res) {
     .save()
     .then((vacancy) => res.json(vacancy))
     .catch((err) => {
-      console.error(err);
       return res.status(503).json({ message: "Не удалось создать вакансию" })
     })
 });
@@ -54,5 +53,16 @@ router.delete("/:id", function(req, res) {
     .then(() => res.status(200).json({ status: true }))
     .catch((err) => res.status(503).json({ message: "Не удалось удалить вакансию" }));
 });
+
+router.put("/:id", function (req, res) {
+
+    Vacancy
+        .findByIdAndUpdate(req.params.id, { candidates: req.body })
+        .then((vacancy) => res.json(vacancy))
+        .catch((err) => {
+            return res.status(503).json({ message: "Не удалось добавить резюме" })
+        })
+})
+
 
 module.exports = router;
