@@ -5,6 +5,7 @@ const Vacancy = require("../../models/Vacancy");
 const Candidate = require("../../models/Candidate");
 const { createConditions } = require('../../helpers')
 
+// Получение списка вакансий
 router.get("/", function (req, res) {
   Vacancy
     .find(createConditions(req.query))
@@ -14,6 +15,7 @@ router.get("/", function (req, res) {
     );
 });
 
+// Создание вакансии
 router.post("/", function(req, res) {
   // TODO Сделать нормальную серверную валидацию
   if(req.body.profession.length < 3) return res.json({ message: "Поле специальность обязательно для заполнения" });
@@ -30,6 +32,7 @@ router.post("/", function(req, res) {
     })
 });
 
+// Получение вакансии по id
 router.get("/:id", function(req, res) {
   Vacancy
     .findById(req.params.id)
@@ -37,8 +40,9 @@ router.get("/:id", function(req, res) {
       Candidate
         .find({ _id: vacancy.candidates })
         .then((candidates) => {
-          vacancy.candidates = candidates;
-          res.json(vacancy);
+          const newVacancy = { ...vacancy }
+          newVacancy.candidates = candidates;
+          res.json(newVacancy);
         })
         .catch((err) => res.status(404).json({ message: "Ошибка при получении списка кандидатов" }))
     })
@@ -47,6 +51,7 @@ router.get("/:id", function(req, res) {
     )
 });
 
+// Удаление вакансии
 router.delete("/:id", function(req, res) {
   Vacancy
     .findByIdAndDelete(req.params.id)
@@ -54,14 +59,15 @@ router.delete("/:id", function(req, res) {
     .catch((err) => res.status(503).json({ message: "Не удалось удалить вакансию" }));
 });
 
-router.put("/:id", function (req, res) {
+// Добавление кандидата в вакансию
+router.put("/:id", async (req, res) => {
+  const vacancy = await Vacancy.findById(req.params.id)
 
-    Vacancy
-        .findByIdAndUpdate(req.params.id, { candidates: req.body })
-        .then((vacancy) => res.json(vacancy))
-        .catch((err) => {
-            return res.status(503).json({ message: "Не удалось добавить резюме" })
-        })
+  Vacancy
+    .findByIdAndUpdate(req.params.id, { candidates: [...vacancy.candidates, req.body.id]})
+    .then((updatedVacancy) => res.json(updatedVacancy))
+    .catch((err) => res.status(503).json({ message: "Не удалось добавить кандидата" }))
+
 })
 
 

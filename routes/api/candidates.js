@@ -4,6 +4,7 @@ const router = express.Router();
 const Candidate = require("../../models/Candidate");
 const { createConditions } = require('../../helpers')
 
+// Получение списка кандидатов
 router.get("/", function (req, res) {
     Candidate
         .find(createConditions(req.query))
@@ -13,6 +14,7 @@ router.get("/", function (req, res) {
         );
 });
 
+// Получение кандидата по id
 router.get("/:id", function(req, res) {
     Candidate
         .findById(req.params.id)
@@ -22,11 +24,9 @@ router.get("/:id", function(req, res) {
         )
 });
 
+// Создание кандидата
 router.post("/", function(req, res) {
-    const candidate = new Candidate({
-        ...req.body,
-        status: "Рассмотрение резюме"
-    });
+    const candidate = new Candidate(req.body);
 
     candidate
         .save()
