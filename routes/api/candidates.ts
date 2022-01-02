@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express'
+import Candidate from '../../models/Candidate'
+import { createConditions } from '../../helpers'
 
-const Candidate = require("../../models/Candidate");
-const { createConditions } = require('../../helpers')
+const router = express.Router();
 
 // Получение списка кандидатов
 router.get("/", function (req, res) {
@@ -36,4 +36,4 @@ router.post("/", function(req, res) {
         })
 });
 
-module.exports = router;
+export default router

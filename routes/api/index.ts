@@ -1,0 +1,8 @@
+export { default as candidates } from './candidates'
+export { default as departments } from './departments'
+export { default as documents } from './documents'
+export { default as professions } from './professions'
+export { default as salaries } from './salaries'
+export { default as vacancies } from './vacancies'
+export { default as workers } from './workers'
+export { default as offices } from './offices'
